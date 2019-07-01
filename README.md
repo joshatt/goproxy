@@ -1,25 +1,29 @@
-<img src="https://github.com/snail007/goproxy/blob/master/docs/images/logo.jpg?raw=true" width="200"/>
+<img src="https://github.com/snail007/goproxy/blob/master/doc/images/logo.jpg?raw=true" width="200"/>
 Proxy is a high performance HTTP, HTTPS, HTTPS, websocket, TCP, UDP, Socks5, ss proxy server implemented by golang. It supports parent proxy,nat forward,TCP/UDP port forwarding, SSH transfer, TLS encrypted transmission, protocol conversion. you can expose a local server behind a NAT or firewall to the internet, secure DNS proxy.  
 
 [Download](https://github.com/snail007/goproxy/releases) 
+
+[Free version vs Commercial version](https://snail007.github.io/goproxy/free_vs_commercial/)
 
 ---  
   
 [![stable](https://img.shields.io/badge/stable-stable-green.svg)](https://github.com/snail007/goproxy/) [![license](https://img.shields.io/github/license/snail007/goproxy.svg?style=plastic)]() [![download_count](https://img.shields.io/github/downloads/snail007/goproxy/total.svg?style=plastic)](https://github.com/snail007/goproxy/releases) [![download](https://img.shields.io/github/release/snail007/goproxy.svg?style=plastic)](https://github.com/snail007/goproxy/releases)  
   
+
+
 **[中文手册](/README_ZH.md)**  
 
+**[GORPOXY IN ACTION](https://snail007.github.io/goproxy)**
+
 **[GUI version](/gui/README.md)**  
+
+**[SDK](https://github.com/snail007/goproxy-sdk)**  
 
 ### Source code declaration
 
 The author of this project found that a large number of developers based on the project for secondary development or using a large number of core code of the project without complying with the GPLv3 agreement, which seriously violates the original intention of using the GPLv3 open source agreement in this project. In view of this situation, the project adopts the source. The code delays the release strategy, to a certain extent, to curb these behaviors that do not respect open source and do not respect the labor results of others.
 This project will continue to update the iterations, and continue to release the full platform binary program, providing you with powerful and convenient proxy tools.
 If you have customized, business needs, please send an email to `arraykeys@gmail.com`
-
-### Attention of update
-
-In order to provide excellent proxy functionality, please be sure to update your proxy within one month of the release of the latest version of the proxy. The official does not guarantee that the availability of the old version will be discontinued at any time after the release of the latest version, and will be discontinued at any time. Older versions will also have prompts when they start. Your use of the Program means that you agree to the update policy.
 
 ### Features  
 - chain-style proxy: the program itself can be a primary proxy, and if a parent proxy is set, it can be used as a second level proxy or even a N level proxy.  
@@ -37,10 +41,10 @@ In order to provide excellent proxy functionality, please be sure to update your
 - Transparent proxy: with the iptables, goproxy can directly forward the 80 and 443 port's traffic to proxy in the gateway, and can realize the unaware intelligent router proxy.  
 - Protocol conversion: The existing HTTP (S) or SOCKS5 or ss proxy can be converted to a proxy which support HTTP (S), SOCKS5 and ss by one port, if the converted SOCKS5 and ss proxy's parent proxy is SOCKS5, which can support the UDP function.Also support powerful cascading authentication.  
 - Custom underlying encrypted transmission, HTTP(s)\sps\socks proxy can encrypt TCP data through TLS standard encryption and KCP protocol encryption. In addition, it also supports custom encryption after TLS and KCP. That is to say, custom encryption and tls|kcp can be used together. The internal uses AES256 encryption, and it only needs to define one password by yourself when is used.   
-- Low level compression and efficient transmission，The HTTP(s)\sps\socks proxy can encrypt TCP data through a custom encryption and TLS standard encryption and KCP protocol encryption, and can also compress the data after encryption. That is to say, the compression and custom encryption and tls|kcp can be used together.
+- Low level compression and efficient transmission,The HTTP(s)\sps\socks proxy can encrypt TCP data through a custom encryption and TLS standard encryption and KCP protocol encryption, and can also compress the data after encryption. That is to say, the compression and custom encryption and tls|kcp can be used together.
 - The secure DNS proxy, Through the DNS proxy provided by the local proxy, you can encrypted communicate with the father proxy to realize the DNS query of security and pollution prevention.
 - Load balance,High availability,HTTP(S)\SOCKS5\SPS proxy support Superior load balance and high availability. Multiple superiors repeat -P parameters.
-- Designated exporting IP,HTTP(S)\SOCKS5\SPS proxy supports the client to connect with the entry IP,Using the entry IP as the  exporting IP to visit the target website。If the entry IP is the intranet IP，Exporting IP will not use entry IP
+- Designated exporting IP,HTTP(S)\SOCKS5\SPS proxy supports the client to connect with the entry IP,Using the entry IP as the  exporting IP to visit the target website.If the entry IP is the intranet IP,Exporting IP will not use entry IP
 - Support speed limit. HTTP (S) \SOCKS5\SPS proxy supports speed limit.
 - SOCKS5 proxy supports cascade authentication.
 - Certificate parameters use base64 data. By default, the - C, - K parameters are the path of the CRT certificate and key file. If “base64://” begins, the subsequent data is thought to be Base64 encoded which will be decoded and used.
@@ -80,7 +84,7 @@ The manual on this page applies to the latest version of goproxy. Other versions
 ### Manual catalogues
 - [Load balance and high available](#load-balance-and-high-available)
 - [Jump through proxy server](#jump-through-proxy-server)
-- [Stop domains](#stop-domains)
+- [Stop  and only domains](#stop-and-only-domains)
 - [1.HTTP proxy](#1http-proxy)
     - [1.1 Common HTTP proxy](#11common-http-proxy)
     - [1.2 Common HTTP second level proxy](#12common-http-second-level-proxy)
@@ -164,7 +168,8 @@ The manual on this page applies to the latest version of goproxy. Other versions
     - [6.12 Designated exporting IP](#612-designated-exporting-ip)
     - [6.13 Certificate parameters using Base64 data](#613-certificate-parameters-using-base64-data)
     - [6.14 Independent service](#614-independent-service)
-    - [6.15 View Help](#615-view-help)
+    - [6.15 Rewrite target address](#615-rewrite-target-address)
+    - [6.16 View Help](#616-view-help)
 - [7.KCP Configuration](#7kcp-configuration)
     - [7.1 Configuration introduction](#71configuration-introduction)
     - [7.2 Configuration details](#72configuration-details)
@@ -174,7 +179,7 @@ The manual on this page applies to the latest version of goproxy. Other versions
 
 
 
-### Fast Start  
+#### Fast Start  
 tips:all operations require root permissions.   
 #### Quick installation
 #### **0. If your VPS is linux64, you can complete the automatic installation and configuration by the following sentence.**  
@@ -201,7 +206,7 @@ chmod +x install.sh
 ./install.sh  
 ```   
   
-## **First use must be read**  
+### **First use must be read**  
   
 ### **Environmental Science**  
 The following tutorial defaults system is Linux, the program is proxy and all operations require root permissions.   
@@ -210,14 +215,16 @@ If the system are windows, please use proxy.exe.
 ### **Use configuration file**  
 The following tutorial is to introduce the useage by the command line parameters, or by reading the configuration file to get the parameters.  
 The specific format is to specify a configuration file by the @ symbol, for example, ./proxy @configfile.txt.   
-configfile.txt's format: The first line is the subcommand name, and the second line begins a new line: the long format of the parameter = the parameter value, there is no space and double quotes before and after.  
-The long format of the parameter's beginning is --, the short format of the parameter's beginning is -. If you don't know which short form corresponds to the long format, please look at the help command.  
-For example, the contents of configfile.txt are as follows:
+configfile.txt's format: The first line is the subcommand name, and the second line begins a new line: `parameter  "the parameter value"`  
+For example, the contents of configfile.txt are as follows:  
+
 ```shell
 http
---local-type=tcp
---local=:33080
+-t tcp
+-p :33080
+--forever
 ```
+
 ### **Debug output**   
 By default, the log output information does not contain the number of file lines. In some cases, in order to eliminate and positione the program problem, You can use the --debug parameter to output the number of lines of code and the wrong time.   
 
@@ -238,7 +245,7 @@ The certificate file goproxy.crt and key file goproxy.key will be generated unde
 
 3.By default, the domain name in the certificate is a random domain and can be specified using the `-n test.com` parameter.  
 
-4.More usage:`proxy keygen --help`。 
+4.More usage:`proxy keygen --help`. 
   
 ### **Daemon mode**
 After the default execution of proxy, if you want to keep proxy running, you can't close the command line. 
@@ -292,35 +299,38 @@ http,socks5 represents the normal http and socks5 proxy.
 https,socks5s represents the http and socks5 proxy protected by tls.
 That is http proxy over TLS, socks over TLS.
 
-### **Stop domains**
+### **Stop and only domains**
 
-The socks/http(s)/sps proxy supports domain name blacklists. Use the --stop parameter to specify a domain name list file. When the user connects these domains in the file, the connection will be disconnected.
+The socks/http(s)/sps proxy supports domain name black and white lists.
+Use the --stop parameter to specify a domain name blacklist file, then the connection will be disconnected when the user connects these domains in the file.
+Specify a domain name whitelist file with the --only parameter, then the connection will be disconnected when the user connects to a domain other than those domains in the file.
+If both --stop and --only are set, then only --only will work.
 
-The format of the blacklist domain name file is as follows:
+The format of the black and white domain name list file is as follows:
 
 ```text
 **.baidu.com
 *.taobao.com
-a.com
+A.com
 192.168.1.1
 192.168.*.*
 ?.qq.com
 ```
 
-Description:  
-1.One domain name per line, domain name writing supports wildcards `*` and `?`, `*` represents any number of characters, `?` represents an arbitrary character.  
-2.`**.baidu.com` matches no matter how many levels all suffixes are `.baidu.com` domain name.  
+Description:
+1. One domain name per line, domain name writing supports wildcards `*` and `?`, `*` represents any number of characters, `?` represents an arbitrary character,
+2.`**.baidu.com` Matches no matter how many levels all suffixes are ..baidu.com`.
 3.`*.taobao.com` The matching suffix is ​​the third-level domain name of `.taobao.com`.
-4. Can also be directly an IP address.
+4. It can also be an IP address directly.
 5.`#` at the beginning of the comment.
 
 ### **1.HTTP proxy**  
 #### **1.1.common HTTP proxy**  
-![1.1](/docs/images/http-1.png)  
+![1.1](/doc/images/http-1.png)  
 `./proxy http -t tcp -p "0.0.0.0:38080"`  
   
 #### **1.2.Common HTTP second level proxy**  
-![1.2](/docs/images/http-2.png)  
+![1.2](/doc/images/http-2.png)  
 Using local port 8090, assume the parent HTTP proxy is: `22.22.22.22:8080`  
 `./proxy http -t tcp -p "0.0.0.0:8090" -T tcp -P "22.22.22.22:8080" `  
 The connection pool is closed by default. If you want to speed up access speed, -L can open the connection pool, the 10 is the size of the connection pool, and the 0 is closed.  
@@ -330,7 +340,7 @@ We can also specify the black and white list files of the domain name, one line 
 `./proxy http -p "0.0.0.0:8090" -T tcp -P "22.22.22.22:8080"  -b blocked.txt -d direct.txt`  
   
 #### **1.3.HTTP second level encrypted proxy**  
-![1.3](/docs/images/http-tls-2.png)  
+![1.3](/doc/images/http-tls-2.png)  
 HTTP first level proxy(VPS,IP:22.22.22.22)    
 `./proxy http -t tls -p ":38080" -C proxy.crt -K proxy.key`  
   
@@ -343,7 +353,7 @@ HTTP second level proxy(local windows)
 In your windows system, the mode of the program that needs to surf the Internet by proxy is setted up as HTTP mode, the address is 127.0.0.1, the port is: 8080, the program can go through the encrypted channel through VPS to surf on the internet.  
   
 #### **1.4.HTTP third level encrypted proxy**  
-![1.4](/docs/images/http-tls-3.png)  
+![1.4](/doc/images/http-tls-3.png)  
 HTTP first level proxy VPS_01,IP:22.22.22.22    
 `./proxy http -t tls -p ":38080" -C proxy.crt -K proxy.key`  
 HTTP second level proxy VPS_02,IP:33.33.33.33   
@@ -380,7 +390,7 @@ Through --always, all HTTP proxy traffic can be coercion to the parent HTTP prox
 `./proxy http --always -t tls -p ":28080" -T tls -P "22.22.22.22:38080" -C proxy.crt -K proxy.key`  
   
 #### **1.7.Transfer through SSH**  
-![1.7](/docs/images/http-ssh-1.png)  
+![1.7](/doc/images/http-ssh-1.png)  
 Explanation: the principle of SSH transfer is to take advantage of SSH's forwarding function, which is, after you connect to SSH, you can access to the target address through the SSH proxy.  
 Suppose there is a vps  
 - IP is 2.2.2.2, ssh port is 22, ssh username is user, ssh password is demo  
@@ -394,7 +404,7 @@ Local HTTP (S) proxy use 28080 port,excute:
 `./proxy http -T ssh -P "2.2.2.2:22" -u user -S user.key -t tcp -p ":28080"`  
 
 #### **1.8.KCP protocol transmission**  
-![1.8](/docs/images/http-kcp.png)  
+![1.8](/doc/images/http-kcp.png)  
 The KCP protocol requires a --kcp-key parameter to set a password which can encrypt and decrypt data.   
 
 Http first level proxy(VPS,IP:22.22.22.22)  
@@ -404,7 +414,7 @@ Http second level proxy(os is Linux)
 `./proxy http -t tcp -p ":8080" -T kcp -P "22.22.22.22:38080" --kcp-key mypassword`  
 Then access to the local 8080 port is access to the proxy's port 38080 on the VPS, and the data is transmitted through the KCP protocol.  
 #### **1.9.HTTP reverse proxy** 
-![1.9](/docs/images/fxdl.png)  
+![1.9](/doc/images/fxdl.png)  
 Proxy supports not only set up a proxy through in other software, to provide services for other software, but support the request directly to the website domain to proxy monitor IP when proxy monitors 80 and 443 ports, then proxy will automatically access to the HTTP proxy access website for you.  
 
 How to use:  
@@ -551,13 +561,13 @@ The meaning of each value is as follows:
 ### **2.TCP proxy**  
   
 #### **2.1.Common TCP first level proxy**  
-![2.1](/docs/images/tcp-1.png)  
+![2.1](/doc/images/tcp-1.png)  
 Local execution:  
 `./proxy tcp -p ":33080" -T tcp -P "192.168.22.33:22" -L 0`  
 Then access to the local 33080 port is the 22 port of access to 192.168.22.33.  
   
 #### **2.2.Common TCP second level proxy**  
-![2.2](/docs/images/tcp-2.png)  
+![2.2](/doc/images/tcp-2.png)  
 VPS(IP:22.22.22.33) execute:  
 `./proxy tcp -p ":33080" -T tcp -P "127.0.0.1:8080" -L 0`  
 local execution:  
@@ -565,7 +575,7 @@ local execution:  
 Then access to the local 23080 port is the 8080 port of access to 22.22.22.33.  
   
 #### **2.3.Common TCP third level proxy**  
-![2.3](/docs/images/tcp-3.png)  
+![2.3](/doc/images/tcp-3.png)  
 TCP first level proxy VPS_01,IP:22.22.22.22  
 `./proxy tcp -p ":38080" -T tcp -P "66.66.66.66:8080" -L 0`  
 TCP second level proxy VPS_02,IP:33.33.33.33  
@@ -575,7 +585,7 @@ TCP third level proxy (local)
 Then access to the local 8080 port is to access the 8080 port of the 66.66.66.66 by encrypting the TCP tunnel.  
   
 #### **2.4.TCP second level encrypted proxy**  
-![2.4](/docs/images/tcp-tls-2.png)  
+![2.4](/doc/images/tcp-tls-2.png)  
 VPS(IP:22.22.22.33) execute:  
 `./proxy tcp --tls -p ":33080" -T tcp -P "127.0.0.1:8080" -L 0 -C proxy.crt -K proxy.key`  
 local execution:  
@@ -583,7 +593,7 @@ local execution:
 Then access to the local 23080 port is to access the 8080 port of the 22.22.22.33 by encrypting the TCP tunnel.  
   
 #### **2.5.TCP third level encrypted proxy**  
-![2.5](/docs/images/tcp-tls-3.png)  
+![2.5](/doc/images/tcp-tls-3.png)  
 TCP first level proxy VPS_01,IP:22.22.22.22  
 `./proxy tcp --tls -p ":38080" -T tcp -P "66.66.66.66:8080" -C proxy.crt -K proxy.key`  
 TCP second level proxy VPS_02,IP:33.33.33.33  
@@ -617,13 +627,13 @@ port:proxy's port
 ### **3.UDP proxy**  
   
 #### **3.1.Common UDP first level proxy**  
-![3.1](/docs/images/udp-1.png)  
+![3.1](/doc/images/udp-1.png)  
 local execution:  
 `./proxy udp -p ":5353" -T udp -P "8.8.8.8:53"`  
 Then access to the local UDP:5353 port is access to the UDP:53 port of the 8.8.8.8.  
   
 #### **3.2.Common UDP second level proxy**  
-![3.2](/docs/images/udp-2.png)  
+![3.2](/doc/images/udp-2.png)  
 VPS(IP:22.22.22.33) execute:  
 `./proxy tcp -p ":33080" -T udp -P "8.8.8.8:53"`  
 local execution:  
@@ -631,7 +641,7 @@ local execution:
 Then access to the local UDP:5353 port is access to the UDP:53 port of the 8.8.8.8 through the TCP tunnel.  
   
 #### **3.3.Common UDP third level proxy**  
-![3.3](/docs/images/udp-3.png)  
+![3.3](/doc/images/udp-3.png)  
 TCP first level proxy VPS_01,IP:22.22.22.22  
 `./proxy tcp -p ":38080" -T udp -P "8.8.8.8:53"`  
 TCP second level proxy VPS_02,IP:33.33.33.33  
@@ -641,7 +651,7 @@ TCP third level proxy (local)
 Then access to the local 5353 port is access to the 53 port of the 8.8.8.8 through the TCP tunnel.  
   
 #### **3.4.UDP second level encrypted proxy**  
-![3.4](/docs/images/udp-tls-2.png)  
+![3.4](/doc/images/udp-tls-2.png)  
 VPS(IP:22.22.22.33) execute:  
 `./proxy tcp --tls -p ":33080" -T udp -P "8.8.8.8:53" -C proxy.crt -K proxy.key`  
 local execution:  
@@ -649,7 +659,7 @@ local execution:
 Then access to the local UDP:5353 port is access to the UDP:53 port of the 8.8.8.8 by the encrypting TCP tunnel. 
   
 #### **3.5.UDP third level encrypted proxy**  
-![3.5](/docs/images/udp-tls-3.png)  
+![3.5](/doc/images/udp-tls-3.png)  
 TCP first level proxy VPS_01,IP:22.22.22.22  
 `./proxy tcp --tls -p ":38080" -T udp -P "8.8.8.8:53" -C proxy.crt -K proxy.key`  
 TCP second level proxy VPS_02,IP:33.33.33.33  
@@ -664,8 +674,8 @@ Then access to the local UDP:5353 port is access to the UDP:53 port of the 8.8.8
 ### **4.Nat forward**  
 #### **4.1、Principle explanation**  
 Nat forward, is divided into two versions, "multi-link version" and "multiplexed version", generally like web services Which is not a long time to connect the service recommende "multi-link version", if you want to keep long Time connection, "multiplexed version" is recommended.
-1. Multilink version, the corresponding subcommand is tserver，tclient，tbridge。  
-1. Multiplexed version, the corresponding subcommand is server，client，bridge。  
+1. Multilink version, the corresponding subcommand is tserver,tclient,tbridge.  
+1. Multiplexed version, the corresponding subcommand is server,client,bridge.  
 1. the parameters and use of Multilink version and multiplexed is exactly the same.  
 1. **Multiplexed version of the server, client can open the compressed transmission, the parameter is --c.**   
 1. **Server, client or both are open compression, either do not open, can not only open one.**    
@@ -825,15 +835,15 @@ Tips: SOCKS5 proxy, support CONNECT, UDP protocol and don't support BIND and sup
 `./proxy socks -t tcp -p "0.0.0.0:38080"`  
    
 #### **5.2.Common SOCKS5 second level proxy**  
-![5.2](/docs/images/socks-2.png)  
-![5.2](/docs/images/5.2.png)
+![5.2](/doc/images/socks-2.png)  
+![5.2](/doc/images/5.2.png)
 Using local port 8090, assume that the parent SOCKS5 proxy is `22.22.22.22:8080`  
 `./proxy socks -t tcp -p "0.0.0.0:8090" -T tcp -P "22.22.22.22:8080" `  
 We can also specify the black and white list files of the domain name, one line for one domain name. The matching rule is the most right-hand matching. For example, baidu.com is *.*.baidu.com, the domain name of the blacklist is directly accessed by the parent proxy, and the domain name of the white list does not access to the parent proxy.  
 `./proxy socks -p "0.0.0.0:8090" -T tcp -P "22.22.22.22:8080"  -b blocked.txt -d direct.txt`  
   
 #### **5.3.SOCKS second level encrypted proxy**  
-![5.3](/docs/images/socks-tls-2.png)  
+![5.3](/doc/images/socks-tls-2.png)  
 SOCKS5 first level proxy(VPS,IP:22.22.22.22)  
 `./proxy socks -t tls -p ":38080" -C proxy.crt -K proxy.key`  
   
@@ -846,7 +856,7 @@ SOCKS5 second level proxy(local windows)
 Then set up your windows system, the proxy that needs to surf the Internet by proxy is Socks5 mode, the address is: 127.0.0.1, the port is: 8080. the program can surf the Internet through the encrypted channel which is running on VPS.  
   
 #### **5.4.SOCKS third level encrypted proxy**  
-![5.4](/docs/images/socks-tls-3.png)  
+![5.4](/doc/images/socks-tls-3.png)  
 SOCKS5 first level proxy VPS_01,IP:22.22.22.22  
 `./proxy socks -t tls -p ":38080" -C proxy.crt -K proxy.key`  
 SOCKS5 second level proxy VPS_02,IP:33.33.33.33  
@@ -860,7 +870,7 @@ By default, proxy will intelligently judge whether a domain name can be accessed
 `./proxy socks --always -t tls -p ":28080" -T tls -P "22.22.22.22:38080" -C proxy.crt -K proxy.key`  
   
 #### **5.6.Transfer through SSH**  
-![5.6](/docs/images/socks-ssh.png)  
+![5.6](/doc/images/socks-ssh.png)  
 Explanation: the principle of SSH transfer is to take advantage of SSH's forwarding function, which is, after you connect to SSH, you can access the target address by the SSH.  
 Suppose there is a vps  
 - IP is 2.2.2.2, SSH port is 22, SSH username is user, SSH password is Demo
@@ -1002,12 +1012,14 @@ The meaning of each value is as follows:
 #### **6.1.Functional introduction** 
 The proxy protocol conversion use the SPS subcommand, SPS itself does not provide the proxy function, just accept the proxy request and then converse protocol and forwarded to the existing HTTP (s) or Socks5 proxy. SPS can use existing HTTP (s) or Socks5 proxy converse to support HTTP (s) and Socks5 HTTP (s) proxy at the same time by one port, and proxy supports forward and reverse proxy (SNI), SOCKS5 proxy which is also does support UDP when parent is Socks5. in addition to the existing HTTP or Socks5 proxy, which supports TLS, TCP, KCP three modes and chain-style connection. That is more than one SPS node connection can build encryption channel.
 
+the following methods are supported by `ss` : aes-128-cfb , aes-128-ctr , aes-128-gcm , aes-192-cfb , aes-192-ctr , aes-192-gcm , aes-256-cfb , aes-256-ctr , aes-256-gcm , bf-cfb , cast5-cfb , chacha20 , chacha20-ietf , chacha20-ietf-poly1305 , des-cfb , rc4-md5 , rc4-md5-6 , salsa20 , xchacha20
+
 #### **6.2.HTTP(S) to HTTP(S) + SOCKS5** 
 Suppose there is a common HTTP (s) proxy: 127.0.0.1:8080. Now we turn it into a common proxy that supports HTTP (s), Socks5 and ss at the same time. The local port after transformation is 18080. ss's Encryption method is aes-192-cfb and its password is pass.  
 command：  
 `./proxy sps -S http -T tcp -P 127.0.0.1:8080 -t tcp -p :18080 -h aes-192-cfb -j pass`
 
-Suppose that there is a TLS HTTP (s) proxy: 127.0.0.1:8080. Now we turn it into a common proxy that supports HTTP (s), Socks5 and ss at the same time. The local port after transformation is 18080, TLS needs certificate file，ss's Encryption method is aes-192-cfb and its password is pass.  
+Suppose that there is a TLS HTTP (s) proxy: 127.0.0.1:8080. Now we turn it into a common proxy that supports HTTP (s), Socks5 and ss at the same time. The local port after transformation is 18080, TLS needs certificate file,ss's Encryption method is aes-192-cfb and its password is pass.  
 command：  
 `./proxy sps -S http -T tls -P 127.0.0.1:8080 -t tcp -p :18080 -C proxy.crt -K proxy.key -h aes-192-cfb -j pass`   
 
@@ -1036,7 +1048,7 @@ command：
 `./proxy sps -S socks -T kcp -P 127.0.0.1:8080 -t tcp -p :18080 --kcp-key demo123`  	`./proxy sps -S ss -H aes-256-cfb -J pass -T tcp -P 127.0.0.1:8080 -t tcp -p :18080 -h aes-192-cfb -j pass`.  
 
 #### **6.5.Chain style connection** 
-![6.4](/docs/images/sps-tls.png)  
+![6.4](/doc/images/sps-tls.png)  
 It is mentioned above that multiple SPS nodes can be connected to build encrypted channels, assuming you have the following VPS and a PC.  
 vps01：2.2.2.2  
 vps02：3.3.3.3  
@@ -1044,16 +1056,16 @@ Now we want to use PC and vps01 and vps02 to build an encrypted channel. In this
 First, on vps01 (2.2.2.2), we run a HTTP (s) proxy that only can be accessed locally,excute：  
 `./proxy -t tcp -p 127.0.0.1:8080`  
 
-Then run a SPS node on vps01 (2.2.2.2)，excute：  
+Then run a SPS node on vps01 (2.2.2.2),excute：  
 `./proxy -S http -T tcp -P 127.0.0.1:8080 -t tls -p :8081 -C proxy.crt -K proxy.key`  
 
-Then run a SPS node on vps02 (3.3.3.3)，excute：  
+Then run a SPS node on vps02 (3.3.3.3),excute：  
 `./proxy -S http -T tls -P 2.2.2.2:8081 -t tls -p :8082 -C proxy.crt -K proxy.key`  
 
-Then run a SPS node on the PC，excute：  
+Then run a SPS node on the PC,excute：  
 `./proxy -S http -T tls -P 3.3.3.3:8082 -t tcp -p :18080 -C proxy.crt -K proxy.key`  
 
-finish。  
+finish.  
 
 #### **6.6.Listening on multiple ports**   
 In general, listening one port is enough, but if you need to monitor 80 and 443 ports at the same time as a reverse proxy, the -p parameter can support it.  
@@ -1061,10 +1073,10 @@ The format is：`-p 0.0.0.0:80,0.0.0.0:443`, Multiple bindings are separated by 
 
 #### **6.7.Authentication** 
 SPS supports HTTP(s)\socks5 proxy authentication, which can concatenate authentication, there are four important information:  
-1:Users send authentication information`user-auth`。   
-2:Local authentication information set up`local-auth`。  
-3:Set the authentication information accessing to the father proxy`parent-auth`。  
-4:The final authentication information sent to the father proxy`auth-info-to-parent`。  
+1:Users send authentication information`user-auth`.   
+2:Local authentication information set up`local-auth`.  
+3:Set the authentication information accessing to the father proxy`parent-auth`.  
+4:The final authentication information sent to the father proxy`auth-info-to-parent`.  
 The relationship between them is as follows:   
 
 | user-auth | local-auth | parent-auth | auth-info-to-paren 
@@ -1101,18 +1113,41 @@ target: if the client is the HTTP (s) proxy request, this represents the complet
 If there is no -a or -F or --auth-url parameters, local authentication is closed.  
 If there is no -A parameter, the connection to the father proxy does not use authentication.  
 
-**Setting up separate authentication information**
+**Set individual authentication information**
 
-If there are many different parent proxys and their passwords are the same or different, then authentication information can be set for each parent proxy.  
-At the same time, a global authentication information can be set with the - A parameter. If a parent proxy does not set the authentication information separately, the global authentication information can be used.  
-Authentication information is written together with parent proxy.  
-format: YTpi#2.2.2.2:33080@1  
-Explain:  
-YTpi is the Authentication information encoded by Base64, For example, http (s)/socks original authentication information, a:b,the user is a and the password is b, which is YTpi after Base64 encoding.   
-if it is ss, A is the encryption method and B is the password, for example, aes-192-cfb:your_pass, which is YWVzLTE5Mi1jZmI6eW91cl9wYXNz after Base64 encoding.  
-\# is an interval symbol. If there is authentication information, there must be #. No authentication information can be omitted #  
-2.2.2.2:33080 is parent proxy's address  
-@1 is weights, Nothing can be omitted. Detailed instructions can be referred to in the manual.***weights***  
+If there are multiple different superiors, and their passwords are different, then you can set authentication information for each superior.
+At the same time, you can also set a global authentication information with the -A parameter. If a higher level does not set the authentication information separately, the globally set authentication information is used.
+The authentication information is written together with the superior.
+The format is: a:b@2.2.2.2:33080#1
+Description:
+    User is a password is b, if the user name and password protection special symbols can be encoded using urlencode
+    If it is ss, then a is the encryption method, b is the password, for example: aes-192-cfb:your_pass
+`@` is the interval symbol. If there is authentication information, there must be @, no authentication information can be omitted @
+2.2.2.2: 33080 is the superior address
+`#`1 is the setting weight, it can be omitted. For details, please refer to the manual *** weight section ***
+
+**Set protocol type for separate authentication information**
+
+If there are multiple different superiors, and their passwords and transmission protocols are the same, then the protocol type of the authentication information can be set for each superior.
+At the same time, a global authentication information protocol type can be set with the -S and -T parameters. If a superior does not have a separate authentication information protocol type, the globally set authentication information protocol type is used.
+The type of authentication information protocol is written together with the superior.
+The format is: `http://a:b@2.2.2.2:33080#1`
+Description:
+`http://` is the protocol type, possible types and contains the following:
+
+```text
+http is equivalent to -S http -T tcp
+https is equivalent to -S http -T tls --parent-tls-single , which is http(s) proxy over TLS
+https2 is equivalent to -S http -T tls
+socks5 is equivalent to -S socks -T tcp
+socks5s is equivalent to -S socks -T tls --parent-tls-single , which is socks over TLS
+socks5s2 is equivalent to -S socks -T tls
+ss is equivalent to -S ss -T tcp
+httpws is equivalent to -S http -T ws
+httpwss is equivalent to -S http -T wss
+socks5ws is equivalent to -S socks -T ws
+socks5wss is equivalent to -S socks -T wss
+```
 
 #### **6.8 Custom encryption**  
 HTTP(s) proxy can encrypt TCP data by TLS standard encryption and KCP protocol encryption, in addition to supporting custom encryption after TLS and KCP, That is to say, custom encryption and tls|kcp can be combined to use. The internal AES256 encryption is used, and it only needs to define one password by yourself. Encryption is divided into two parts, the one is whether the local (-z) is encrypted and decrypted, the other is whether the parents (-Z) is encrypted and decrypted.
@@ -1184,7 +1219,20 @@ The sps function does not force a parent to be specified. When the parent is emp
 The following command is to open the http(s)\ss\socks service with one port.    
 `./proxy sps -p :33080`  
 
-#### **6.15. View Help** 
+#### **6.15 Rewrite Target Address** 
+The HTTP(S)\SOCKS5\SS proxy function provided by the SPS function, the client connects to the specified "target" through the SPS proxy. This "target" is generally a website or an arbitrary TCP address.
+The website "target" is generally foo.com:80, foo.com:443, and sps supports the use of the --rewrite parameter to specify a ‘target’ redirection rule file to redirect the target, and the client is non-perceived.
+For example, if you redirect to "target": demo.com:80 to 192.168.0.12:80, then the client visits the website demo.com, in fact, the website service provided by 192.168.0.12.
+Example of a "target" redirection rule file:
+
+```text
+#example
+Www.a.com:80 10.0.0.2:8080
+** .b.com: 80 10.0.0.2:80
+192.168.0.11:80 10.0.0.2:8080
+```
+
+#### **6.16 View Help** 
 `./proxy help sps` 
 
 ### **7.KCP Configuration**   
@@ -1221,7 +1269,27 @@ If you want to get a more detailed configuration and explanation of the KCP para
 ### **8.DNS anti pollution server** 
 
 #### **8.1.Introduction** 
-It is well known that DNS is a service which use UDP protocol and 53 port，But with the development of network, some well-known DNS servers also support TCP protocol's DNS query，such as google's 8.8.8.8，Proxy's DNS anti pollution server theory is starting a local DNS proxy server，It uses TCP to conduct DNS queries through father proxy. If it encrypted communicate with father proxy，Then you can make a safe and pollution-free DNS analysis.    
+DNS is known as the service provided by UDP port 53, but with the development of the network, some well-known DNS servers also support TCP mode dns query, such as Google's 8.8.8.8, the DNS anti-pollution server principle of the proxy is to start a proxy DNS proxy locally. Server, which uses TCP to perform dns query through the superior agent. If it communicates with the superior agent, it can perform secure and pollution-free DNS resolution. It also supports independent services, concurrent parsing, and enhanced enhanced hosts file function to support flexible concurrent parsing and forwarding.
+
+Dns resolution order:
+1. Use the parameter --hosts to parse.
+2. If the domain name to be resolved is not found in 1, it is parsed using the parameter --forward rule.
+3. The domain name to be resolved is not found in 1 and 2, and the default --default parsing is used. The default default behavior parameter values ​​are three: proxy, direct, and system.
+    The three parameter values ​​are explained as follows:
+    Proxy: The domain name is resolved by the dns server specified by the -q parameter.
+    Direct: Connect to the dns server specified by the -q parameter to resolve the domain name through the local network.
+    System: resolves the domain name through the system dns.
+
+Tip:
+1.The host file format specified by the --hosts parameter is the same as the system hosts file, and the domain name supports wildcards. You can refer to the hosts file.
+2.The parsing forwarding rule file specified by the --forward parameter can be referenced to the resolve.rules file. The domain name supports wildcards. It supports multiple dns servers for each domain name to be parsed concurrently. The resolution of the fastest resolution is used.
+3.The -q parameter can specify multiple remote dns servers to perform concurrent parsing. Whoever resolves the fastest parsing success, the default is: 1.1.1.1, 8.8.8.8, 9.9.9.9, multiple comma-separated. For example, you can also bring ports: 1.1.1.1, 8.8.8.8#53, 9.9.9.9
+
+If you start a standalone service, you don't need a parent:
+Can execute:
+`proxy dns --default system -p :5353`
+Or
+`proxy dns --default direct -p :5353`
 
 #### **8.2.Use examples** 
 
@@ -1300,7 +1368,7 @@ proxy QQ group: 42805407
 if proxy help you a lot,you can support us by:
 
 ### AliPay
-<img src="https://github.com/snail007/goproxy/blob/master/docs/images/alipay.jpg?raw=true" width="200"/>
+<img src="https://github.com/snail007/goproxy/blob/master/doc/images/alipay.jpg?raw=true" width="200"/>
   
 ### Wechat Pay
-<img src="https://github.com/snail007/goproxy/blob/master/docs/images/wxpay.jpg?raw=true" width="200"/>
+<img src="https://github.com/snail007/goproxy/blob/master/doc/images/wxpay.jpg?raw=true" width="200"/>

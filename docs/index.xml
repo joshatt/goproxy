@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GOPROXY IN ACTION</title>
+    <link>https://snail007.github.io/goproxy/</link>
+    <description>Recent content on GOPROXY IN ACTION</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 28 Jun 2019 17:37:30 +0800</lastBuildDate>
+    
+	<atom:link href="https://snail007.github.io/goproxy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>GOPROXY免费版VS商业版</title>
+      <link>https://snail007.github.io/goproxy/free_vs_commercial/</link>
+      <pubDate>Wed, 26 Jun 2019 13:19:15 +0800</pubDate>
+      
+      <guid>https://snail007.github.io/goproxy/free_vs_commercial/</guid>
+      <description>目前，GOPROXY 和 SDK 提供免费版和商业版，功能对比如下。 免费版 商业版 基础功能 √ √ HTTP(S)代理认证，认证API，负载均衡 × √ SOCKS</description>
+    </item>
+    
+    <item>
+      <title>常见问题解答</title>
+      <link>https://snail007.github.io/goproxy/faq/goproxy%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94/</link>
+      <pubDate>Fri, 14 Jun 2019 16:29:13 +0800</pubDate>
+      
+      <guid>https://snail007.github.io/goproxy/faq/goproxy%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94/</guid>
+      <description>问：http代理支持https网站吗？ 答：goproxy的http代理同时支持http和https网站。 问：socks5代理支持UDP吗？ 答</description>
+    </item>
+    
+    <item>
+      <title>Cloudflare使用简明教程</title>
+      <link>https://snail007.github.io/goproxy/posts/cloudflare/</link>
+      <pubDate>Fri, 28 Jun 2019 17:37:30 +0800</pubDate>
+      
+      <guid>https://snail007.github.io/goproxy/posts/cloudflare/</guid>
+      <description>前言 GOPROXY底层传输协议支持ws，可以利用cdn加速，使用cdn需要域名解析知识以及cdn的一些知识，那么很多小伙伴对cdn不是很熟悉</description>
+    </item>
+    
+    <item>
+      <title>内网穿透也能用CDN？？？！</title>
+      <link>https://snail007.github.io/goproxy/posts/http-nat-cdn/</link>
+      <pubDate>Fri, 28 Jun 2019 17:02:57 +0800</pubDate>
+      
+      <guid>https://snail007.github.io/goproxy/posts/http-nat-cdn/</guid>
+      <description>内网穿透之套CDN 好处就不用说了吧，两个字稳！ 假如在windows上配置了可以访问的连接 http://127.0.0.1:801/abc/index.php , 如何能使用VPS+CDN做内网穿透呢？ 配置如下：</description>
+    </item>
+    
+    <item>
+      <title>代理之套用CDN</title>
+      <link>https://snail007.github.io/goproxy/posts/http_cdn_ws/</link>
+      <pubDate>Fri, 14 Jun 2019 16:25:06 +0800</pubDate>
+      
+      <guid>https://snail007.github.io/goproxy/posts/http_cdn_ws/</guid>
+      <description>goproxy代理之套用CDN 准备 在VPS上下载对应平台的执行文件，这里以Linux为例。 在电脑上下载对应平台的执行文件，这里以Window</description>
+    </item>
+    
+    <item>
+      <title>Categories</title>
+      <link>https://snail007.github.io/goproxy/categories/</link>
+      <pubDate>Fri, 14 Jun 2019 15:29:47 +0800</pubDate>
+      
+      <guid>https://snail007.github.io/goproxy/categories/</guid>
+      <description>不用看这里，没什么内容，仅仅为了定义目录和tags。</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://snail007.github.io/goproxy/about/</link>
+      <pubDate>Fri, 14 Jun 2019 13:22:19 +0800</pubDate>
+      
+      <guid>https://snail007.github.io/goproxy/about/</guid>
+      <description>It&amp;rsquo;s YOU!</description>
+    </item>
+    
+  </channel>
+</rss>
